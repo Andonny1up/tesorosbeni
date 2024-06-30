@@ -1,0 +1,25 @@
+{% extends "reportbump/layouts/base.html" %}
+{% block title %}SINSUETA{% endblock title %}
+{% block content %}
+<section class="section-hero">
+    <div class="content">
+        <h1 class="h1" style="text-align: center; color: #010101;">Descubre los proyectos de nuestra gestión</h1>
+        <a href="{% url "maps" %}" class="btn-red" style="width: fit-content;">
+            
+            <h4><i class="fa fa-map-o"></i> Ir al Mapa</h4>
+        </a>
+    </div>
+</section>
+<section class="section-about">
+    <div>
+        <h2 class="h2">¿Qué es SINSUETA?</h2>
+        <p>SINSUETA es una plataforma que te permite conocer los proyectos de nuestra gestión de manera transparente y en tiempo real. Aquí podrás ver los proyectos que estamos realizando en tu barrio, ciudad o municipio.</p>
+    </div>
+    <div>
+        <h2 class="h2">¿Cómo funciona?</h2>
+        <p>Para ver los proyectos de nuestra gestión, solo debes hacer clic en el botón "Ir al Mapa" y podrás ver los proyectos en un mapa interactivo. Si deseas más información sobre un proyecto en particular, solo debes hacer clic en el marcador correspondiente.</p>
+    </div>
+</section>
+<section class="section-mas">
+</section
+{% endblock content %}

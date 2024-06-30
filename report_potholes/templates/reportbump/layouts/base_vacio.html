@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        
+        {% endblock title %}
+    </title>
+    {% comment %} <link rel="stylesheet" href="{% static 'admin_ssu/bootstrap/css/bootstrap.min.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{% static 'reportbump/logos/logo_trinibache.ico' %}">
+    <!-- reference CSS file -->
+    <link rel="stylesheet" href="{% static 'reportbump/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'reportbump/css/tablet.css' %}" media="(min-width: 768px)">
+    
+    {% comment %} <link rel="stylesheet" href="./css/desktop.css" media="(min-width: 992px)"> {% endcomment %}
+    {% block css %}
+    
+    {% endblock css %}
+</head>
+<body>
+    <main>
+        {% block content %}
+            
+        {% endblock content %}
+    </main>
+    <a href="#home" class="fa fa-chevron-up" id="scroll-top"></a>
+    <script>
+        let btnAside = document.getElementById('menu-bar-aside');
+        let menuAside = document.getElementById('menu-aside');
+        let btnClose = document.getElementById('btn-aside');
+        btnClose.onclick = () =>{
+            menuAside.classList.remove('active');
+        }
+        btnAside.onclick = () =>{
+            menuAside.classList.toggle('active');
+        }
+    </script>
+    {% comment %} <script src="{% static 'admin_ssu/bootstrap/js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}
+    
+    {% block js %}
+    
+    {% endblock js %}
+</body>
+</html>

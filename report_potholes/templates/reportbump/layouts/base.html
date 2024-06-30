@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        
+        {% endblock title %}
+    </title>
+    {% comment %} <meta property="og:title" content="Trinibache">
+    <meta property="og:description" content="Registra">
+    <meta property="og:image" content="{% static 'reportbump/logos/logo_trinibache.png' %}">
+    <meta property="og:url" content="https://trinibache.com/"> {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="{% static 'admin_ssu/bootstrap/css/bootstrap.min.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{% static 'reportbump/logos/logo_trinibache.ico' %}">
+    <!-- reference CSS file -->
+    <link rel="stylesheet" href="{% static 'reportbump/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'reportbump/css/tablet.css' %}" media="(min-width: 768px)">
+    
+    {% comment %} <link rel="stylesheet" href="./css/desktop.css" media="(min-width: 992px)"> {% endcomment %}
+    {% block css %}
+    
+    {% endblock css %}
+</head>
+<body>
+    <header>
+        <a href="{% url "index" %}" class="logo"><i class="fa fa-map"></i> Esto No es TriniBache</a>
+        <div id="menu-bar" class="fa fa-bars"></div>
+        <nav class="navbar">
+            <a href="{% url "index" %}">Inicio</a>
+            <a href="{% url "admin_ssu:login" %}">Admin</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+            
+        {% endblock content %}
+    </main>
+    <footer class="footer">
+        <div class="share">
+            <a href="#" class="btn">facebook</a>
+            <a href="#" class="btn">twitter</a>
+            <a href="#" class="btn">instagram</a>
+        </div>
+        <h1 class="credit">@Derechos <span>Reservados</span> | 2024</h1>
+    </footer>
+    <!-- scroll top button -->
+    <a href="#home" class="fa fa-chevron-up" id="scroll-top"></a>
+    <script src="{% static "reportbump/js/script.js" %}"></script>
+    {% comment %} <script src="{% static 'admin_ssu/bootstrap/js/bootstrap.bundle.min.js' %}"></script> {% endcomment %}
+    
+    {% block js %}
+    
+    {% endblock js %}
+</body>
+</html>

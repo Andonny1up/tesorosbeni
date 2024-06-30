@@ -1,0 +1,27 @@
+{% extends "reportbump/layouts/base.html" %}
+{% block title %}Bache Reportado{% endblock title %}
+{% block content %}
+<section id="home" class="home">
+    <div class="container">
+        <h1 class="h1">{{pothole.title}}</h1>
+        <img class="img" src="{{ pothole.display_image.url }}" alt="Foto del bache" width="300px">
+        <h2>Gestión: {{pothole.year_management}}</h2>
+        <p class="contenido">
+            <strong>Categoria:</strong> {{ pothole.category.name }}
+        </p>
+        <p class="contenido">
+            {{ pothole.description }}
+        </p>
+    </div>
+</section>
+{% endblock content %}
+{% block css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+{% endblock css %}
+{% block js %}
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+
+</script>
+{% endblock js %}

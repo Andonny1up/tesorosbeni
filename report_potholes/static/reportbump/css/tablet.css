@@ -1,0 +1,20 @@
+
+#menu-bar{
+    display: none; 
+}
+header .navbar{
+    position: relative;
+    border: none;
+    /* background: #fff; */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+header .navbar a{
+    display: inline;
+    border: none;
+    margin: 0 0 0 2rem;
+    padding: 0;
+}
+.section-about{
+    flex-direction: row;
+    gap: 1rem;
+}
