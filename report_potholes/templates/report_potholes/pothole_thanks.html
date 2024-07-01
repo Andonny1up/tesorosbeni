@@ -1,18 +1,18 @@
-{% extends "reportbump/layouts/base.html" %}
-{% block title %}TriniBache{% endblock title %}
+{% extends "reportbump/layouts/base_page.html" %}
+{% block title %}BENI{% endblock title %}
 {% block content %}
-<section id="home"class="home">
+<section id="home"class="home section-dark">
     {% comment %} <h1 class="heading main">Reporta <span>ya</span></h1> {% endcomment %}
-    <div class="content">
+    <div class="content text-center">
         <p class="p-thanks">
             
-            <i class="fa fa-paper-plane"></i>
+            <i class="fa fa-paper-plane mb-5" style="font-size:4rem"></i>
             <br>
-            Muchas gracias por tu reporte, tu ayuda es muy importante para mejorar nuestra ciudad.
+            Muchas gracias por tu reporte.
             
         </p>
         
-        <a href="{% url "index" %}" class="btn-red">
+        <a href="{% url "index" %}" class="btn my-btn-primary">
             Volver al inicio
         </a>
     </div>

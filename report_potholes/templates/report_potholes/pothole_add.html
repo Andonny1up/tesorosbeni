@@ -1,147 +1,174 @@
-{% extends "reportbump/layouts/base.html" %}
+{% extends "reportbump/layouts/base_page.html" %}
 {% load static %}
-{% block title %}Reporta bache{% endblock title %}
+{% block title %}Comparte tu hallazgo{% endblock title %}
 {% block content %}
-<section id="home"class="home">
-    <div class="panel">
-        <h1 class="heading main">Reportar <span>Bache</span></h1>
+<section id="form-send" class="section-dark">
+    <div class="container mt-5">
         <div class="row">
-            <form id="my-form" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="inputBox">
-                    <label for="reported_by">{{ form.reported_by.label }}</label>
-                    {{ form.reported_by }}
+            <div class="col">
+                <h1 class="heading">
+                    <i class="fa fa-bookmark"></i> Comparte tu hallazgo
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card mb-5">
+                    <div class="card-body p-5">
+                        <form class="form-user" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for field in form %}
+                                <p>
+                                    {{ field.label_tag }} {{ field }}
+                                    {{ field.errors }}
+                                    {% if field.help_text %}
+                                        <span class="form-text text-muted">{{ field.help_text }}</span>
+                                    {% endif %}
+                                </p>
+                            {% endfor %}
+                            {% comment %} {{ form.as_p }} {% endcomment %}
+                            <div id="mapid" style="height: 280px; width: 100%;"></div>
+                            <div class="d-flex justify-content-end mt-2">
+                                <button type="submit" class="btn my-btn-primary">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="inputBox">
-                    <label for="phone">{{ form.phone.label }}</label>
-                    {{ form.phone }}
-                </div>
-                <div class="inputBox">
-                    <label for="photo">{{ form.photo.label }}</label>
-                    {{ form.photo }}
-                </div>
-                <div id="mapid" style="height: 180px; width: 100%;"></div>
-                <div class="inputBox">
-                    <label for="latitude">{{ form.latitude.label }}</label>
-                    {{ form.latitude }}
-                </div>
-                <div class="inputBox">
-                    <label for="longitude">{{ form.longitude.label }}</label>
-                    {{ form.longitude }}
-                </div>
-                <button type="submit" id="submit-button" class="btn-block">Enviar</button>
-            </form>
-            
+            </div>
         </div>
     </div>
-    <span id="spinner" class="loader" style=""></span>
-    <div id="backdrop"></div>
 </section>
+{% comment %} document.getElementById('id_latitude').value = e.target.getLatLng().lat.toFixed(7);
+document.getElementById('id_longitude').value = e.target.getLatLng().lng.toFixed(7); {% endcomment %}
+{% endblock %}
+{% block js %}
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    var map = L.map('mapid').setView([-14.835, -64.90], 13);
 
-{% endblock content %}
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
+
+    var marker = L.marker([-14.835, -64.90428], {draggable: true}).addTo(map);
+    {% if action == 'Editar' %}
+        var lat = document.getElementById('id_latitude').value;
+        var lng = document.getElementById('id_longitude').value;
+        marker.setLatLng([lat, lng]);
+        map.setView([lat, lng], 13);
+    {% endif %}
+    {% comment %} var marker = L.marker([lat, lng], {draggable: true}).addTo(map); {% endcomment %}
+
+    function updateLatLng(e) {
+      
+      document.getElementById('id_latitude').value = e.latlng.lat.toFixed(7);
+      document.getElementById('id_longitude').value = e.latlng.lng.toFixed(7);
+      marker.setLatLng(e.latlng);
+    }
+    map.on('click', updateLatLng);
+    marker.on('dragend', updateLatLng);
+</script>
+{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-    .loader {
-        display: none;
-        width: 200px;
-        height: 200px;
-        border: 20px solid #FFF;
-        border-bottom-color: #FF3D00;
-        z-index: 9001;
-        border-radius: 50%;
-        box-sizing: content-box;
-        animation: rotation 1s linear infinite;
-    
-        position: fixed;
-        top: calc(50% - 100px);
-        left: calc(50%-100px);
-        transform: translate(-50%, -50%);
-    }
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    #backdrop {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9000;
-    }
+.form-user p{
+
+}
+.form-user p label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+.form-user p input[type='text'], .form-user p input[type='email'], .form-user p input[type='password']{
+    width: 100%;
+    padding: 0.2rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.form-user p span{
+    padding-left: 0.5rem;
+}
+.form-user p select{
+    width: 100%;
+    padding: 0.2rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+}
+.form-user p input[type='checkbox']{
+
+}
+ul{}
+ul li{
+    font-size: 0.8rem;
+
+    list-style: none;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
 {% endblock css %}
-{% block js %}
-<script src="{% static 'admin_ssu/jquery/jquery.min.js' %}"></script>
-<script>
-    document.querySelector('#my-form').addEventListener('submit', function(event) {
-        //event.preventDefault();
-        var button = document.getElementById('submit-button');
-        var spinner = document.getElementById('spinner');
-        var backdrop = document.getElementById('backdrop');
-        button.textContent = 'Enviando...';
-        button.disabled = true;
-        spinner.style.display = 'block';
-        backdrop.style.display = 'block';
-    
-        // Simula una demora de 3 segundos antes de enviar el formulario
-        //setTimeout(function() {
-        //    document.querySelector('#my-form').submit();
-        //}, 100);
-    });
-</script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-    var map = L.map('mapid').setView([51.505, -0.09], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    var marker = L.marker([51.5, -0.09]).addTo(map);
-
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition);
-        } else { 
-            alert("La geolocalización no es soportada por este navegador.");
-        }
-    }
-
-    function setPosition(position) {
-        document.getElementById('id_latitude').value = position.coords.latitude;
-        document.getElementById('id_longitude').value = position.coords.longitude;
-        var location = [position.coords.latitude, position.coords.longitude];
-        marker.setLatLng(location);
-        map.setView(location);
-        map.invalidateSize();
-    }
-
-    window.onload = function() {
-        getLocation();
-    };
-</script>
-{% comment %} <script>
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(setPosition);
-        } else { 
-            alert("La geolocalización no es soportada por este navegador.");
-        }
-    }
-
-    function setPosition(position) {
-        document.getElementById('id_latitude').value = position.coords.latitude;
-        document.getElementById('id_longitude').value = position.coords.longitude;
-    }
-
-    window.onload = getLocation;
-</script> {% endcomment %}
-{% endblock js %}

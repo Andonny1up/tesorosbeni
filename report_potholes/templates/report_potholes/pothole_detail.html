@@ -1,15 +1,17 @@
-{% extends "reportbump/layouts/base.html" %}
-{% block title %}Bache Reportado{% endblock title %}
+{% extends "reportbump/layouts/base_page.html" %}
+{% block title %}TESORO DEL BENI{% endblock title %}
 {% block content %}
-<section id="home" class="home">
+<section id="home" class="home section-dark">
     <div class="container">
-        <h1 class="h1">{{pothole.title}}</h1>
-        <img class="img" src="{{ pothole.display_image.url }}" alt="Foto del bache" width="300px">
-        <h2>Gestión: {{pothole.year_management}}</h2>
+        <h1 class="h1 text-center">{{pothole.title}}</h1>
+        <div class="d-flex justify-content-center">
+            <img class="img" src="{{ pothole.display_image.url }}" alt="Foto del " width="300px">
+        </div>
+        {% comment %} <h2>Gestión: {{pothole.year_management}}</h2>
         <p class="contenido">
             <strong>Categoria:</strong> {{ pothole.category.name }}
-        </p>
-        <p class="contenido">
+        </p> {% endcomment %}
+        <p class="contenido text-center">
             {{ pothole.description }}
         </p>
     </div>

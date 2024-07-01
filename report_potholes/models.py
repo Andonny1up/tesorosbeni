@@ -28,11 +28,16 @@ class Pothole(models.Model):
                                    format='JPEG',
                                    options={'quality': 80})
     year_management = models.IntegerField('Gestión', null=True, blank=True)
+    
     latitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=7, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    location = models.CharField('Ubicación', max_length=255, null=True, blank=True)
+    province = models.CharField('Provincia',max_length=255, null=True, blank=True)
+    municipality = models.CharField('Municipio',max_length=255, null=True, blank=True)
+    discovery_date = models.DateField('Fecha del hallazgo',null=True, blank=True)
 
 
 class PotholeImage(models.Model):

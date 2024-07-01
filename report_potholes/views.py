@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, TemplateView, DetailView, DeleteView
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Pothole, Category
-from .forms import PotholeForm, ProyectForm
+from .forms import PotholeForm, ProyectForm, ProyectFormPublic
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core import serializers
 from django.core.exceptions import PermissionDenied
@@ -114,6 +114,18 @@ class PotholeCreateView(LoginRequiredMixin, PermissionRequiredMixin,CreateView):
     def form_valid(self, form):
         form.instance.approved = True
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['action'] = 'Crear'
+        return context
+    
+class PotholeCreateViewPublic(CreateView):
+    """Vista publico para reportar un proyecto."""
+    model = Pothole
+    form_class = ProyectFormPublic
+    template_name = 'report_potholes/pothole_add.html'
+    success_url = reverse_lazy('thanks')
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

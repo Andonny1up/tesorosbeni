@@ -1,12 +1,12 @@
 {% extends "admin_ssu/master.html" %}
-{% block title %} Baches Map {% endblock title %}
+{% block title %}  Map {% endblock title %}
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="col mb-3">
             <h1 class="heading">
-                <i class="fa fa-map-marker"></i> Mapa del bache
+                <i class="fa fa-map-marker"></i> Mapa 
             </h1>
             <a href="{% url 'admin_ssu:report_potholes:potholes_browse' %}" class="btn btn-sm btn-warning"><i class="fa fa-arrow-left"></i> Volver</a>
             {% if perms.report_potholes.change_pothole %} 
@@ -28,7 +28,7 @@
                     </div>
                     <div class="div-detail">
                         <label>imagen Destacada</label>
-                        <img class="img" src="{{ pothole.display_image.url }}" alt="Foto del bache" width="300px">
+                        <img class="img" src="{{ pothole.display_image.url }}" alt="Foto del " width="300px">
                         <hr>
                     </div>
                     <div class="div-detail">
@@ -126,7 +126,7 @@
     }).addTo(map);
 
     L.marker([parseFloat(potholeData.latitude), parseFloat(potholeData.longitude)]).addTo(map)
-        .bindPopup('<span>Bache Actual.</span> <br/> <img src="{{ pothole.thumbnail.url }}" width="80px"/>')
+        .bindPopup('<span>Actual.</span> <br/> <img src="{{ pothole.thumbnail.url }}" width="80px"/>')
         .openPopup();
     var greenIcon = L.icon({
         iconUrl: 'https://cdn-icons-png.flaticon.com/128/889/889647.png',
@@ -136,7 +136,7 @@
     });
     for (var i = 0; i < nearbyPotholesData.length; i++) {
         L.marker([parseFloat(nearbyPotholesData[i].latitude), parseFloat(nearbyPotholesData[i].longitude)],{icon: greenIcon}).addTo(map)
-            .bindPopup('<a href="' + nearbyPotholesData[i].url + '" target="_blank">Bache registrado.</a>');
+            .bindPopup('<a href="' + nearbyPotholesData[i].url + '" target="_blank"> registrado.</a>');
     }
 </script>
 {% endblock js %}
