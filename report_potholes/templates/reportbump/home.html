@@ -26,8 +26,14 @@
                     <h1 class="title-page">Descubre los Tesoros Ocultos del Beni</h1>
                 </div>
                 <div class="mt-4">
-                    <a href="{% url "maps" %}" class="btn my-btn-primary">IR AL MAPA</a>
-                    <a href="{% url "report" %}" class="btn cta-btn-outline">COMPARTE</a>
+                    <a href="{% url "report" %}" class="btn my-btn-primary">COMPARTE TU DESCUBRIMIENTO</a>
+                    {% comment %} <a href="{% url "maps" %}" class="btn cta-btn-outline">IR AL MAPA</a> {% endcomment %}
+                    
+                </div>
+                <div class="mt-4">
+                    {% comment %} <a href="{% url "report" %}" class="btn my-btn-primary">COMPARTE TU DESCUBRIMIENTO</a> {% endcomment %}
+                    <a href="{% url "maps" %}" class="btn cta-btn-outline">IR AL MAPA</a>
+                    
                 </div>
             </div>
           </div>

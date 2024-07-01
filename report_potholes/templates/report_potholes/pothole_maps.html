@@ -1,10 +1,10 @@
 {% extends "reportbump/layouts/base_vacio.html" %}
 {% block title %}Mapa de reportes{% endblock title %}
 {% block content %}
-<section id="main-map">
+<section id="main-map" class="section-dark">
     <div class="container_map">
         <aside>
-            <nav class="menu-aside">
+            <nav class="menu-aside section-dark">
                 <ul>
                     <li>
                         <div id="menu-bar-aside" class="fa fa-bars"></div>
@@ -14,9 +14,9 @@
                     </li> {% endcomment %}
                 </ul>
             </nav>
-            <div id="menu-aside" class="options-aside">
+            <div id="menu-aside" class="options-aside section-dark">
                 <div class="menu_top_aside">
-                    <h3>Filtros</h3>
+                    <h3 style="color:white;">Filtros</h3>
                     <i id="btn-aside" class="fa fa-close"></i>
                 </div>
                 <form class="form-filter" action="">
@@ -30,7 +30,7 @@
                             {% endif %}
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn-red">Filtrar</button>
+                    <button type="submit" class="btn my-btn-primary">Filtrar</button>
                 </form>
             </div>
         </aside>

@@ -61,20 +61,22 @@ class ProyectFormPublic(forms.ModelForm):
 
     class Meta:
         model = Pothole
-        fields = ['title','photo','description','location','province','municipality','discovery_date','latitude', 'longitude']
+        fields = ['title','photo','description','reported_by','location','province','municipality','discovery_date','latitude', 'longitude']
         labels = {
             'title': 'Titúlo',
             'photo': 'Foto',
+            'reported_by': 'Autor',
             'latitude': 'Latitud',
             'longitude': 'Longitud',
         }
         widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control', 'required': 'required'}),
+            'title': forms.TextInput(attrs={'class': 'form-control', 'required': 'required','placeholder': 'Un titulo que describa tu descubrimiento'}),
             'photo': forms.FileInput(attrs={'class': 'form-control-file'}),
+            'reported_by': forms.TextInput(attrs={'class': 'form-control', 'required': 'required','placeholder': 'Tu Nombre Completo'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-            'location': forms.TextInput(attrs={'class': 'form-control'}),
-            'province': forms.TextInput(attrs={'class': 'form-control'}),
-            'municipality': forms.TextInput(attrs={'class': 'form-control'}),
+            'location': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Ejemplo: Al sur de Trinidad'}),
+            'province': forms.TextInput(attrs={'class': 'form-control','placeholder': 'CERCADO'}),
+            'municipality': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Trinidad'}),
             'discovery_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'latitude': forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly','required': 'required'},),
             'longitude': forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly','required': 'required'}),

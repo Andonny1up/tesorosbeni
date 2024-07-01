@@ -318,13 +318,13 @@ footer hr{
     color: #d9f2dd;
 
 }
-#form-send .card input{
+#form-send .card input,#form-send .card textarea{
     background-color: #06140c;
     color: white;
     border: none;
     border-bottom: 1px solid var(--color-fondo-950);
 }
-#form-send .card input:focus{
+#form-send .card input:focus ,#form-send .card textarea:focus{
     border: none;
     border-bottom: 1px solid var(--color-primary);
     box-shadow: none;

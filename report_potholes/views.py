@@ -12,6 +12,7 @@ from django.core.exceptions import PermissionDenied
 import json
 from django.conf import settings
 import os
+from django.db.models import Count
 
 # Create your views here.
 class CategoryBrowseView(LoginRequiredMixin, PermissionRequiredMixin,TemplateView):
@@ -198,7 +199,7 @@ class ApprovedPotholeMapView(TemplateView):
             potholes_data.append(pothole_data)
         context['potholes'] = json.dumps(potholes_data, cls=DjangoJSONEncoder, ensure_ascii=False)
         context['total_potholes'] = potholes.count()
-        context['categories'] = Category.objects.all()
+        context['categories'] = Category.objects.annotate(num_photos=Count('pothole')).filter(num_photos__gt=0)
         return context
     
 
